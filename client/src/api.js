@@ -1,7 +1,7 @@
-import { plantsPage } from "./example_plants";
+import { plantsPage } from "../../data/example_plants";
 
 const apiClient = {
-  getPlants: async function (params) {
+  searchPlants: async function (params) {
     return plantsPage;
   },
 };
