@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 import './App.css'
 import { apiClient } from './api'
+import BooleanFilter from './components/BooleanFilter'
 
 
 // const API_KEY = import.meta.env.API_KEY
@@ -26,6 +27,10 @@ function App() {
     }
   }
 
+  function clearParams(e) {
+    e.preventDefault()
+    setParams({"indoor": null, "edible": null, "poisonous": null, "query": ""})
+  }
   // async function handleSubmit(event) {
   //   event.preventDefault()
   //   setError("")
@@ -42,24 +47,11 @@ function App() {
     <>
       <h1>Find your favourite plants</h1>
       <form >
-        <div >
-          <label>Indoor</label>      
-            <input onClick={() => setParams({...params, "indoor": true})} type="radio" name="indoor" id="indoor=1" />Yes
-            <input onClick={() => setParams({...params, "indoor": false})} type="radio" name="indoor" id="indoor=0" />No
-        </div>
-        <div>
-          <label>Edible</label>      
-            <input onClick={() => setParams({...params, "edible": true})} type="radio" name="edible" id="edible=1" />Yes
-            <input onClick={() => setParams({...params, "edible": false})} type="radio" name="edible" id="edible=0" />No
-        </div>
-        <div>
-          <label>Poisonous</label>      
-            <input onClick={() => setParams({...params, "poisonous": true})} type="radio" name="poisonous" id="poisonous=1" />Yes
-            <input onClick={() => setParams({...params, "poisonous": false})} type="radio" name="poisonous" id="poisonous=0" />No
-        </div>
-        
-          
+        <BooleanFilter value={"indoor"} setParams={setParams} params={params} />
+        <BooleanFilter value={"edible"} setParams={setParams} params={params}/>
+        <BooleanFilter value={"poisonous"} setParams={setParams} params={params}/>         
         <input onChange={(e) => setParams({...params, "query": e.target.value})} placeholder="Search by name" name="search-bar"></input>
+        <button onClick={clearParams}>Clear</button>
         <button>Search</button>
       </form>
 
