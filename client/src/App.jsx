@@ -11,7 +11,7 @@ function App() {
   const [plants, setPlants] = useState([])
   const [error, setError] = useState("")
   const [params, setParams] = useState({"indoor": null, "edible": null, "poisonous": null, "query": ""})
-  const noImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png"
+  const noImage = "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png"
 
   
   useEffect(() => {
@@ -30,6 +30,7 @@ function App() {
   function clearParams(e) {
     e.preventDefault()
     setParams({"indoor": null, "edible": null, "poisonous": null, "query": ""})
+    console.log(params)
   }
   // async function handleSubmit(event) {
   //   event.preventDefault()
@@ -46,14 +47,23 @@ function App() {
   return (
     <div className='container'>
       <h2 className='display-3 mb-4'>Find your favourite plants</h2>
+      
       <form >
-        <RadioInput value={"indoor"} setParams={setParams} params={params} />
-        <RadioInput value={"edible"} setParams={setParams} params={params}/>
-        <RadioInput value={"poisonous"} setParams={setParams} params={params}/>         
-        <input onChange={(e) => setParams({...params, "query": e.target.value})} placeholder="Search by name" name="search-bar" className='form-control m-3 w-25' ></input>
-        <button onClick={clearParams} className='btn btn-light me-2 mb-4'>Clear</button>
+        <div className='row'>
+          <RadioInput value={"indoor"} setParams={setParams} params={params} />
+          <RadioInput value={"edible"} setParams={setParams} params={params}/>
+          <RadioInput value={"poisonous"} setParams={setParams} params={params}/>
+        </div>
+                
+        <input 
+          onChange={(e) => setParams({...params, "query": e.target.value})} 
+          placeholder="Search by name" 
+          name="search-bar" 
+          className='form-control m-3 row w-50' 
+        ></input>
+        <button type="reset" onClick={clearParams} className='btn btn-light me-2 mb-4'>Clear</button>
         <button className='btn btn-success mb-4'>Search</button>
-      </form>
+      </form>    
 
       <div>{error}</div>
 
