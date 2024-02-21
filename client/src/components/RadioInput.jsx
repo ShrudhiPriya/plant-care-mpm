@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function BooleanFilter({value, setParams, params}) {
+export default function RadioInput({value, setParams, params}) {
 
   return (
     <div>
