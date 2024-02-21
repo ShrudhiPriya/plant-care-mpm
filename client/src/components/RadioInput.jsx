@@ -3,20 +3,20 @@ import React from 'react'
 export default function RadioInput({value, setParams, params}) {
 
   return (
-    <div className='col'>
-        <label className='form-label me-3'><strong>{value.charAt(0).toUpperCase() + value.slice(1)}</strong></label>      
+    <div className='col-4'>
+        <label className='me-3'><strong>{value.charAt(0).toUpperCase() + value.slice(1)}</strong></label>      
             <input 
               onChange={() => setParams({...params, [`${value}`]: true})} 
               type="radio" 
               name={value}
-              className='form-check-input me-1'
+              className='form-check-input me-2'
               checked={params[value] || false}
             />Yes
             <input 
               onChange={() => setParams({...params, [`${value}`]: false})} 
               type="radio" 
               name={value}
-              className='form-check-input ms-3 me-1' 
+              className='form-check-input ms-3 me-2' 
               checked={!params[value] && params[value] !== null || false}
             /> No
     </div>

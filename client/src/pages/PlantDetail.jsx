@@ -5,9 +5,8 @@ export default function PlantDetail() {
   const { id } = useParams()
   return (
     <>
-        <Link to="/Catalog">Catalog</Link>
+        <Link to="/catalog">Catalog</Link>
         <div>PlantDetail {id}</div>
-        
     </>
     
   )

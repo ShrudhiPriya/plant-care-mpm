@@ -43,24 +43,34 @@ export default function Catalog() {
   
     return (
       <div className='container'>
-        <h2 className='display-3 mb-4'>Find your favourite plants</h2>
-        
-        <form >
-          <div className='row'>
+        <div className='row mb-3'>
+          <h2 className='display-3'>Find your favourite plants</h2>
+        </div>
+                
+        <form className='container'>
+          
+          <div className='row mb-4'>
             <RadioInput value={"indoor"} setParams={setParams} params={params} />
             <RadioInput value={"edible"} setParams={setParams} params={params}/>
             <RadioInput value={"poisonous"} setParams={setParams} params={params}/>
           </div>
-                  
-          <input 
-            onChange={(e) => setParams({...params, "query": e.target.value})} 
-            placeholder="Search by name" 
-            name="search-bar" 
-            className='form-control m-3 row w-50'
-            value={params.query} 
-          ></input>
-          <button type="reset" onClick={clearParams} className='btn btn-light me-2 mb-4'>Clear</button>
-          <button className='btn btn-success mb-4'>Search</button>
+
+          <div className='row mb-5'>
+            <div className='col-9'>
+              <input 
+                onChange={(e) => setParams({...params, "query": e.target.value})} 
+                placeholder="Search by name" 
+                name="search-bar" 
+                className='form-control'
+                value={params.query} 
+              ></input>
+            </div>            
+            <div className='col-3'>
+              <button type="reset" onClick={clearParams} className='btn btn-light'>Clear</button>
+              <button className='btn btn-success'>Search</button>
+            </div>            
+          </div>       
+          
         </form>    
   
         <div>{error}</div>
@@ -69,7 +79,6 @@ export default function Catalog() {
           {plants.map(plant => 
             <div key={plant.id} className='col' >
               <Link to={`/catalog/${plant.id}`}>
-                  {/* https://stackoverflow.com/questions/40108298/react-get-object-inside-another-object */}
                 <img src={plant.default_image && plant.default_image.thumbnail ? plant.default_image.thumbnail : noImage} className='rounded mb-1'/>
               </Link>
               <p className='mb-1'><strong>{plant.common_name}</strong></p>
