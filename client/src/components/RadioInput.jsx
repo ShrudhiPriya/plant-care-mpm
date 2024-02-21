@@ -11,6 +11,7 @@ export default function RadioInput({value, setParams, params}) {
               name={value}
               className='form-check-input me-1'
               checked={params[value]}
+              onChange={e => {}}
             />Yes
             <input 
               onClick={() => setParams({...params, [`${value}`]: false})} 
@@ -18,6 +19,7 @@ export default function RadioInput({value, setParams, params}) {
               name={value}
               className='form-check-input ms-3 me-1' 
               checked={!params[value] && params[value] !== null}
+              onChange={e => {}}
             /> No
     </div>
   )
