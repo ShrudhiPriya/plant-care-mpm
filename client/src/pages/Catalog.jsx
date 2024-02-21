@@ -2,6 +2,7 @@ import React from 'react'
 import { apiClient } from '../api'
 import RadioInput from '../components/RadioInput'
 import { useState, useEffect } from 'react'
+import { Link } from "react-router-dom"
 
 export default function Catalog() {
     const [plants, setPlants] = useState([])
@@ -26,7 +27,7 @@ export default function Catalog() {
     function clearParams(e) {
       e.preventDefault()
       setParams({"indoor": null, "edible": null, "poisonous": null, "query": ""})
-      console.log(params)
+      
     }
     // async function handleSubmit(event) {
     //   event.preventDefault()
@@ -55,7 +56,8 @@ export default function Catalog() {
             onChange={(e) => setParams({...params, "query": e.target.value})} 
             placeholder="Search by name" 
             name="search-bar" 
-            className='form-control m-3 row w-50' 
+            className='form-control m-3 row w-50'
+            value={params.query} 
           ></input>
           <button type="reset" onClick={clearParams} className='btn btn-light me-2 mb-4'>Clear</button>
           <button className='btn btn-success mb-4'>Search</button>
@@ -66,9 +68,10 @@ export default function Catalog() {
         <div className='row'>
           {plants.map(plant => 
             <div key={plant.id} className='col' >
-              
-              {/* https://stackoverflow.com/questions/40108298/react-get-object-inside-another-object */}
-              <img src={plant.default_image && plant.default_image.thumbnail ? plant.default_image.thumbnail : noImage} className='rounded mb-1'/>
+              <Link to={`/catalog/${plant.id}`}>
+                  {/* https://stackoverflow.com/questions/40108298/react-get-object-inside-another-object */}
+                <img src={plant.default_image && plant.default_image.thumbnail ? plant.default_image.thumbnail : noImage} className='rounded mb-1'/>
+              </Link>
               <p className='mb-1'><strong>{plant.common_name}</strong></p>
               <p className='mb-5'><em>{plant.scientific_name}</em></p>
             </div>)}
