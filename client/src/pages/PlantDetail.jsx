@@ -15,7 +15,10 @@ import {
   WaterBottle,
   Tree,
   Scissors,
+  HandHoldingHeart,
 } from "react-flaticons";
+import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
 
 export default function PlantDetail() {
   const { id } = useParams();
@@ -23,6 +26,8 @@ export default function PlantDetail() {
   const [guide, setGuide] = useState([]);
   const noImage =
     "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png";
+  const [openDescription, setOpenDescription] = useState(false);
+  const [openGuide, setOpenGuide] = useState(false);
 
   useEffect(() => {
     getPlant();
@@ -85,10 +90,7 @@ export default function PlantDetail() {
         </div>
 
         <div className="col-8">
-          <div>
-            <p>{plant.description}</p>
-          </div>
-          <div className="row">
+          <div className="row bg-success-subtle p-3 rounded">
             <div className="col-6">
               <Tree />
               <p>
@@ -98,13 +100,13 @@ export default function PlantDetail() {
               <p>
                 <strong>Indoor:</strong> {plant.indoor === false ? "No" : "Yes"}
               </p>
+              <User />
               <p>
-                <User />
                 <strong>Poisonous to humans:</strong>{" "}
                 {plant.poisonous_to_humans ? "Yes" : "No"}
               </p>
+              <Paw />
               <p>
-                <Paw />
                 <strong>Poisonous to pets:</strong>{" "}
                 {plant.poisonous_to_pets ? "Yes" : "No"}
               </p>
@@ -128,12 +130,11 @@ export default function PlantDetail() {
               <p>
                 <strong>Watering:</strong> {plant.watering}
               </p>
-              <Sun />
               <CloudSun />
               <p>
                 <strong>Sunlight:</strong> {plant.sunlight}
               </p>
-              <Scissors /> <CalendarPen />
+              <Scissors />
               <p>
                 <strong>Pruning:</strong>{" "}
                 {plant.pruning_month ? plant.pruning_month.join(", ") : null}
@@ -147,20 +148,64 @@ export default function PlantDetail() {
           </div>
         </div>
       </div>
-
+      <div className="row mt-3 mb-4">
+        <div className="col">
+          <Button
+            onClick={() => setOpenDescription(!openDescription)}
+            aria-controls="description"
+            aria-expanded={openDescription}
+            className="btn btn-primary"
+          >
+            {openDescription ? "Close description" : "Open description"}
+          </Button>
+        </div>
+        <div className="col">
+          <Button
+            onClick={() => setOpenGuide(!openGuide)}
+            aria-controls="care-guide"
+            aria-expanded={openGuide}
+            className="btn btn-success"
+          >
+            {openGuide ? "Close care guide" : "Open care guide"}
+          </Button>
+        </div>
+      </div>
       <div>
-        {guide.data
-          ? guide.data[0].section.map((section) => (
-              <div key={section.id}>
-                <h5>{capitalizeFirstLetter(section.type)}</h5>
-                <p>
-                  {section.description
-                    ? section.description
-                    : `No ${section.type} information available.`}
-                </p>
+        <Collapse in={openDescription}>
+          <div
+            className="card card-body bg-body-secondary text-start"
+            id="description"
+          >
+            <h5>Description</h5>
+            <p>{plant.description}</p>
+          </div>
+        </Collapse>
+        <Collapse in={openGuide}>
+          <div id="care-guide">
+            <div className="card card-body bg-body-secondary text-start">
+              <div className="row">
+                <div className="col-1">
+                  <HandHoldingHeart />
+                </div>
+                <div className="col-2">
+                  <h5>Care Guide</h5>
+                </div>
               </div>
-            ))
-          : null}
+              {guide.data
+                ? guide.data[0].section.map((section) => (
+                    <div key={section.id} className="mt-3">
+                      <h6>{capitalizeFirstLetter(section.type)}</h6>
+                      <p>
+                        {section.description
+                          ? section.description
+                          : `No ${section.type} information available.`}
+                      </p>
+                    </div>
+                  ))
+                : null}
+            </div>
+          </div>
+        </Collapse>
       </div>
     </div>
   );
