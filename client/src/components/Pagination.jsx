@@ -1,13 +1,12 @@
-import { useState } from "react";
 import { ArrowAltRight, ArrowAltLeft } from "react-flaticons";
 
-export default function Pagination({ page }) {
+export default function Pagination({ page, updatePageNumber }) {
   return (
     <div>
-      <button>
+      <button onClick={() => updatePageNumber(page.pageNumber - 1)}>
         <ArrowAltLeft />
       </button>
-      <button>
+      <button onClick={() => updatePageNumber(page.pageNumber + 1)}>
         <ArrowAltRight />
       </button>
       <div>{page.pageNumber}</div>

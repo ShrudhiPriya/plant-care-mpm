@@ -11,7 +11,6 @@ export default function Catalog() {
   const [params, setParams] = useState({});
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchPage, setSearchPage] = useState(searchParams.get("page") || 1);
 
   const [page, setPage] = useState({
     pageNumber: 1,
@@ -27,14 +26,21 @@ export default function Catalog() {
   }, []);
 
   useEffect(() => {
+    setParams(readSearchParams);
+  }, [searchParams]);
+
+  useEffect(() => {
+    setParams(params);
+  }, [searchParams]);
+
+  function readSearchParams() {
     const result = {};
 
     for (const entry of searchParams.entries()) {
       result[entry[0]] = entry[1];
     }
-
-    setParams(result);
-  }, [searchParams]);
+    return result;
+  }
 
   // async function getPlants() {
   //   try {
@@ -55,7 +61,7 @@ export default function Catalog() {
 
   async function getPlants() {
     try {
-      const plants = await apiClient.searchPlants(params /*page*/);
+      const plants = await apiClient.searchPlants(params, page);
       setPlants(plants.data);
     } catch (error) {
       setError(error);
@@ -64,7 +70,12 @@ export default function Catalog() {
 
   function handleFormSearch(e) {
     e.preventDefault();
+    // setParams({ ...params, page: 1 });
+    setPage({ ...page, pageNumber: 1 });
     setSearchParams(params);
+    console.log(params);
+
+    // navigatePage(1);
   }
 
   function clearParams(e) {
@@ -72,24 +83,23 @@ export default function Catalog() {
     // setSearchParams({});
     setParams({});
   }
-  // async function handleSubmit(event) {
-  //   event.preventDefault()
-  //   setError("")
-  //   await filterPlants()
-  //   setQuery("")
-  //   setFilter("")
+
+  // function handlePageChange(e) {
+  //   e.preventDefault();
+  //   setPage({ ...page, pageNumber: [pageNumber] + 1 });
+  //   console.log(page);
+  //   setSearchPage(page.pageNumber);
+  //   setSearchParams("page", searchPage);
   // }
 
-  // async function filterPlants() {
-  //   plants.map(plant => )
-  // }
+  function navigatePage(newPage) {
+    const newParams = readSearchParams();
+    const newSearchParams = { ...newParams, page: newPage };
 
-  function handlePageChange(e) {
-    e.preventDefault();
-    setPage({ ...page, pageNumber: [pageNumber] + 1 });
-    console.log(page);
-    setSearchPage(page.pageNumber);
-    setSearchParams("page", searchPage);
+    setSearchParams(newSearchParams);
+    console.log(params);
+    // setParams(newParams); NOOOOOOOOOOOOOO
+    setPage({ ...page, pageNumber: newPage });
   }
 
   return (
@@ -154,7 +164,8 @@ export default function Catalog() {
           </div>
         ))}
       </div>
-      <Pagination page={page} />
+
+      <Pagination page={page} updatePageNumber={navigatePage} />
     </div>
   );
 }
