@@ -209,12 +209,9 @@ const plantsPage = {
         "https://perenual.com/storage/species_image/30_acer_palmatum_ao_shime_no_uchi/thumbnail/Acer_palmatum_Ao_shime_no_uchi_3zz.jpg",
     },
   ],
-  to: 30,
-  per_page: 30,
-  current_page: 1,
-  from: 1,
-  last_page: 337,
-  total: 10102,
+  page_number: 1,
+  has_next: true,
+  has_previous: false,
 };
 
 const speciesDetail = {

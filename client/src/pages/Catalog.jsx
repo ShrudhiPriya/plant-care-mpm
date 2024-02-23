@@ -8,15 +8,16 @@ import Pagination from "../components/Pagination";
 export default function Catalog() {
   const [plants, setPlants] = useState([]);
   const [error, setError] = useState("");
+  const [params, setParams] = useState({});
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchPage, setSearchPage] = useState(searchParams.get("page") || 1);
 
   const [page, setPage] = useState({
     pageNumber: 1,
     hasNext: true,
     hasPrevious: false,
   });
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const [params, setParams] = useState({});
 
   const noImage =
     "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png";
@@ -54,7 +55,7 @@ export default function Catalog() {
 
   async function getPlants() {
     try {
-      const plants = await apiClient.searchPlants(params, page);
+      const plants = await apiClient.searchPlants(params /*page*/);
       setPlants(plants.data);
     } catch (error) {
       setError(error);
@@ -68,7 +69,7 @@ export default function Catalog() {
 
   function clearParams(e) {
     e.preventDefault();
-    setSearchParams({});
+    // setSearchParams({});
     setParams({});
   }
   // async function handleSubmit(event) {
@@ -82,6 +83,14 @@ export default function Catalog() {
   // async function filterPlants() {
   //   plants.map(plant => )
   // }
+
+  function handlePageChange(e) {
+    e.preventDefault();
+    setPage({ ...page, pageNumber: [pageNumber] + 1 });
+    console.log(page);
+    setSearchPage(page.pageNumber);
+    setSearchParams("page", searchPage);
+  }
 
   return (
     <div className="container">
@@ -145,7 +154,7 @@ export default function Catalog() {
           </div>
         ))}
       </div>
-      <Pagination />
+      <Pagination page={page} />
     </div>
   );
 }
