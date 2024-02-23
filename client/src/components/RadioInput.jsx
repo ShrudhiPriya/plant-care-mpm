@@ -11,7 +11,7 @@ export default function RadioInput({ value, setParams, params }) {
         type="radio"
         name={value}
         className="form-check-input me-2"
-        checked={params[value] || false}
+        checked={params[value] === true || params[value] === "true"}
       />
       Yes
       <input
@@ -19,8 +19,11 @@ export default function RadioInput({ value, setParams, params }) {
         type="radio"
         name={value}
         className="form-check-input ms-3 me-2"
-        checked={(!params[value] && params[value] !== undefined) || false}
-      />{" "}
+        checked={params[value] === false || params[value] === "false"}
+        // checked={
+        //   (!params[value] && params[value] !== undefined) || [`${false}`]
+        // }
+      />
       No
     </div>
   );
