@@ -2,23 +2,38 @@ import React from "react";
 import { apiClient } from "../apiClient";
 import RadioInput from "../components/RadioInput";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import Pagination from "../components/Pagination";
 
 export default function Catalog() {
   const [plants, setPlants] = useState([]);
   const [error, setError] = useState("");
-  const [params, setParams] = useState({
-    indoor: null,
-    edible: null,
-    poisonous: null,
-    query: "",
+
+  const [page, setPage] = useState({
+    pageNumber: 1,
+    hasNext: true,
+    hasPrevious: false,
   });
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [params, setParams] = useState({});
+
   const noImage =
     "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png";
 
   useEffect(() => {
     getPlants();
   }, []);
+
+  useEffect(() => {
+    const result = {};
+
+    for (const entry of searchParams.entries()) {
+      result[entry[0]] = entry[1];
+    }
+
+    setParams(result);
+  }, [searchParams]);
 
   // async function getPlants() {
   //   try {
@@ -30,18 +45,31 @@ export default function Catalog() {
   //   }
   // }
 
+  // function updateSearchParams() {}
+
+  // function readSearchParams(then) {
+  //   const pageNumber = searchParams.get("page") || 1;
+  //   setPage({ ...page, pageNumber }, then);
+  // }
+
   async function getPlants() {
     try {
-      const plants = await apiClient.searchPlants(params);
+      const plants = await apiClient.searchPlants(params, page);
       setPlants(plants.data);
     } catch (error) {
       setError(error);
     }
   }
 
+  function handleFormSearch(e) {
+    e.preventDefault();
+    setSearchParams(params);
+  }
+
   function clearParams(e) {
     e.preventDefault();
-    setParams({ indoor: null, edible: null, poisonous: null, query: "" });
+    setSearchParams({});
+    setParams({});
   }
   // async function handleSubmit(event) {
   //   event.preventDefault()
@@ -77,9 +105,9 @@ export default function Catalog() {
             <input
               onChange={(e) => setParams({ ...params, query: e.target.value })}
               placeholder="Search by name"
-              name="search-bar"
+              name="query"
               className="form-control"
-              value={params.query}
+              value={params.query ? params.query : ""}
             ></input>
           </div>
           <div className="col-3">
@@ -90,7 +118,9 @@ export default function Catalog() {
             >
               Clear
             </button>
-            <button className="btn btn-success">Search</button>
+            <button onClick={handleFormSearch} className="btn btn-success">
+              Search
+            </button>
           </div>
         </div>
       </form>
@@ -115,6 +145,7 @@ export default function Catalog() {
           </div>
         ))}
       </div>
+      <Pagination />
     </div>
   );
 }
