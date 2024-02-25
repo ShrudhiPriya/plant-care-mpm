@@ -63,6 +63,11 @@ export default function Catalog() {
     try {
       const plants = await apiClient.searchPlants(params, page);
       setPlants(plants.data);
+      setPage({
+        pageNumber: plants.page_number,
+        hasNext: plants.has_next,
+        hasPrevious: plants.has_previous,
+      });
     } catch (error) {
       setError(error);
     }

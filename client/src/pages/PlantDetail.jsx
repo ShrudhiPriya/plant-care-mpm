@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
+// import { useRouter } from "next/router";
 import { apiClient } from "../apiClient";
 import {
   Home,
@@ -28,6 +29,7 @@ export default function PlantDetail() {
     "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png";
   const [openDescription, setOpenDescription] = useState(false);
   const [openGuide, setOpenGuide] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPlant();
@@ -62,6 +64,17 @@ export default function PlantDetail() {
     }
   }
 
+  function handleGoBack(e) {
+    e.preventDefault();
+    // Not suer why it has to be greater than 2
+    const hasPreviousPage = window.history.length > 2;
+    console.log(hasPreviousPage);
+    if (!hasPreviousPage) {
+      return navigate("/catalog");
+    }
+    return navigate(-1);
+  }
+
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -69,7 +82,8 @@ export default function PlantDetail() {
   return (
     <div className="container">
       <div className="row">
-        <Link to="/catalog">Catalog</Link>
+        {/* <Link to={-1}>Catalog</Link> */}
+        <button onClick={handleGoBack}>Catalog</button>
         <div className="col-4">
           <img
             src={
