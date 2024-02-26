@@ -22,16 +22,10 @@ export default function Catalog() {
     "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png";
 
   useEffect(() => {
-    getPlants();
+    const queryParams = readSearchParams();
+    setParams(queryParams);
+    getPlants(queryParams);
   }, []);
-
-  // useEffect(() => {
-  //   setParams(readSearchParams);
-  // }, [searchParams]);
-
-  useEffect(() => {
-    setParams(params);
-  }, [searchParams]);
 
   function readSearchParams() {
     const result = {};
@@ -42,26 +36,10 @@ export default function Catalog() {
     return result;
   }
 
-  // async function getPlants() {
-  //   try {
-  //     const response = await fetch(`/api/catalog`);
-  //     const data = await response.json();
-  //     setPlants(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
-  // function updateSearchParams() {}
-
-  // function readSearchParams(then) {
-  //   const pageNumber = searchParams.get("page") || 1;
-  //   setPage({ ...page, pageNumber }, then);
-  // }
-
-  async function getPlants() {
+  async function getPlants(queryParams) {
     try {
-      const plants = await apiClient.searchPlants(params, page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      const plants = await apiClient.searchPlants(queryParams);
       setPlants(plants.data);
       setPage({
         pageNumber: plants.page_number,
@@ -75,36 +53,21 @@ export default function Catalog() {
 
   function handleFormSearch(e) {
     e.preventDefault();
-    // setParams({ ...params, page: 1 });
-    setPage({ ...page, pageNumber: 1 });
-    setSearchParams(params);
-    console.log(params);
-
-    // navigatePage(1);
+    const queryParams = { ...params, page: 1 };
+    setSearchParams(queryParams);
+    getPlants(queryParams);
   }
 
   function clearParams(e) {
     e.preventDefault();
-    // setSearchParams({});
     setParams({});
   }
 
-  // function handlePageChange(e) {
-  //   e.preventDefault();
-  //   setPage({ ...page, pageNumber: [pageNumber] + 1 });
-  //   console.log(page);
-  //   setSearchPage(page.pageNumber);
-  //   setSearchParams("page", searchPage);
-  // }
-
   function navigatePage(newPage) {
-    const newParams = readSearchParams();
-    const newSearchParams = { ...newParams, page: newPage };
-
-    setSearchParams(newSearchParams);
-    console.log(params);
-    // setParams(newParams); NOOOOOOOOOOOOOO
-    setPage({ ...page, pageNumber: newPage });
+    const queryParams = { ...readSearchParams(), page: newPage };
+    setParams(queryParams);
+    setSearchParams(queryParams);
+    getPlants(queryParams);
   }
 
   return (
@@ -138,7 +101,7 @@ export default function Catalog() {
             <button
               type="reset"
               onClick={clearParams}
-              className="btn btn-light"
+              className="btn btn-light me-2"
             >
               Clear
             </button>

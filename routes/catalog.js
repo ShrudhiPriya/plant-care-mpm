@@ -49,7 +49,7 @@ function mapQueryParams({ query, edible, indoor, poisonous, page }) {
     queryString += `&poisonous=${toApiBoolean(poisonous)}`;
   }
   if (page) {
-    queryString += `&page=${toApiBoolean(page)}`;
+    queryString += `&page=${page}`;
   }
   return queryString;
 }
@@ -58,4 +58,70 @@ function toApiBoolean(booleanString) {
   return booleanString === "true" ? 1 : 0;
 }
 
+/*GET plant details from the DB */
+// router.get("/:id", )
+
+/*GET plant details in DB*/
+router.get("/:id", checkIdInDatabase, async function (req, res) {
+  const id = req.params.id;
+
+  // let { details, care } = req.body;
+
+  const details = getSpeciesDetails(id);
+  const care = getSpeciesCare(id);
+
+  try {
+    await db(
+      `INSERT INTO plants (${Object.keys(details)}, ${Object.keys(
+        care
+      )}) VALUES (${Object.values(details)}, ${Object.values(care)})`
+    );
+    res.send(`Plant with plant_api_id ${id} inserted`);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+async function getSpeciesDetails(id) {
+  const response = await fetch(
+    `https://perenual.com/api/species/details/${id}?key=${process.env.API_KEY}`
+  );
+  const results = await response.json();
+
+  return {
+    plant_api_id: results.id,
+    common_name: results.common_name,
+    scientific_name: results.scientific_name,
+    type: results.type,
+    propagation: results.propagation,
+    watering: results.watering,
+    sunlight: results.sunlight,
+    pruning_month: results.pruning_month,
+    indoor: results.indoor,
+    flowers: results.flowers,
+    edible_fruit: results.edible_fruit,
+    edible_leaf: results.edible_leaf,
+    poisonous_to_humans: results.poisonous_to_humans,
+    poisonous_to_pets: results.poisonous_to_pets,
+    plant_description: results.description,
+    thumbnail: results.default_image ? results.default_image.thumbnail : null,
+    medium_image: results.default_image
+      ? results.default_image.small_url
+      : null,
+  };
+}
+
+async function getSpeciesCare(id) {
+  const results = (
+    await fetch(
+      `https://perenual.com/api/species-care-guide-list?key=${process.env.API_KEY}&species_id=${id}`
+    )
+  ).json();
+
+  return !results.data
+    ? null
+    : results.data.section[0].map((section) => ({
+        [`${section.type}_description`]: section.description,
+      }));
+}
 module.exports = router;
