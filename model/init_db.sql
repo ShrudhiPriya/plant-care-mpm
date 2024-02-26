@@ -38,7 +38,6 @@ CREATE TABLE plants(
     edible_fruit TINYINT(1),
     edible_leaf TINYINT(1),
     flowers TINYINT(1),
-    cycle VARCHAR(255),
     watering VARCHAR(255),
     propagation VARCHAR(255),
     sunlight VARCHAR(255),
