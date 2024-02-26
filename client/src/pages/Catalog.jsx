@@ -25,9 +25,9 @@ export default function Catalog() {
     getPlants();
   }, []);
 
-  useEffect(() => {
-    setParams(readSearchParams);
-  }, [searchParams]);
+  // useEffect(() => {
+  //   setParams(readSearchParams);
+  // }, [searchParams]);
 
   useEffect(() => {
     setParams(params);
