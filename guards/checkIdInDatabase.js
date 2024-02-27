@@ -25,7 +25,7 @@ async function checkIdInDatabase(req, res, next) {
         edible_leaf: dbResult.edible_leaf === 1 ? true : false,
         poisonous_to_humans: dbResult.poisonous_to_humans === 1 ? true : false,
         poisonous_to_pets: dbResult.poisonous_to_pets === 1 ? true : false,
-        plant_description: dbResult.description,
+        plant_description: dbResult.plant_description,
         medium_image: dbResult.medium_image,
         watering_description: dbResult.watering_description,
         sunlight_description: dbResult.sunlight_description,

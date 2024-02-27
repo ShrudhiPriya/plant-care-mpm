@@ -15,9 +15,6 @@ const apiClient = {
     const response = await fetch(`/api/catalog/${id}`);
     return await response.json();
   },
-  // getPlantGuide: async function (id) {
-  //   return speciesGuide;
-  // },
 };
 
 export { apiClient };

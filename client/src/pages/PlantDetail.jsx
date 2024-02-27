@@ -24,7 +24,6 @@ import Collapse from "react-bootstrap/Collapse";
 export default function PlantDetail() {
   const { id } = useParams();
   const [plant, setPlant] = useState([]);
-  // const [guide, setGuide] = useState([]);
   const noImage =
     "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png";
   const [openDescription, setOpenDescription] = useState(false);
@@ -166,7 +165,11 @@ export default function PlantDetail() {
             id="description"
           >
             <h5>Description</h5>
-            <p>{plant.description}</p>
+            {plant.plant_description ? (
+              <p>{plant.plant_description}</p>
+            ) : (
+              "No description available."
+            )}
           </div>
         </Collapse>
         <Collapse in={openGuide}>
@@ -185,7 +188,7 @@ export default function PlantDetail() {
                 {plant.watering_description ? (
                   <p>{plant.watering_description}</p>
                 ) : (
-                  "Sorry, no watering information available."
+                  "No watering information available."
                 )}
               </div>
               <div className="mt-2 mb-3">
