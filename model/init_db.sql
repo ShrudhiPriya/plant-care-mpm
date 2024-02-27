@@ -28,7 +28,6 @@ CREATE TABLE plants(
     plant_api_id BIGINT NOT NULL,
     scientific_name VARCHAR(255) NOT NULL,
     common_name VARCHAR(255) NOT NULL,
-    thumbnail VARCHAR(255),
     medium_image VARCHAR(255),
     plant_type VARCHAR(255),
     indoor TINYINT(1),
