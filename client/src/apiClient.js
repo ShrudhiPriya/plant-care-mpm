@@ -1,8 +1,8 @@
-import {
-  // plantsPage,
-  speciesDetail,
-  // speciesGuide,
-} from "../../data/example_plants";
+// import {
+//   plantsPage,
+//   speciesDetail,
+//   speciesGuide,
+// } from "../../data/example_plants";
 
 const apiClient = {
   searchPlants: async function (params) {
