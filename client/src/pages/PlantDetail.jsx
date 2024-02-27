@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 // import { useRouter } from "next/router";
 import { apiClient } from "../apiClient";
 import {
@@ -24,7 +24,7 @@ import Collapse from "react-bootstrap/Collapse";
 export default function PlantDetail() {
   const { id } = useParams();
   const [plant, setPlant] = useState([]);
-  const [guide, setGuide] = useState([]);
+  // const [guide, setGuide] = useState([]);
   const noImage =
     "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png";
   const [openDescription, setOpenDescription] = useState(false);
@@ -33,18 +33,8 @@ export default function PlantDetail() {
 
   useEffect(() => {
     getPlant();
-    getPlantCareGuide();
+    // getPlantCareGuide();
   }, []);
-
-  //   async function getPlant() {
-  //     try {
-  //       const response = await fetch(`/api/catalog/${id}`);
-  //       const data = await response.json();
-  //       setPlant(data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
 
   async function getPlant() {
     try {
@@ -55,14 +45,14 @@ export default function PlantDetail() {
     }
   }
 
-  async function getPlantCareGuide() {
-    try {
-      const careGuide = await apiClient.getPlantGuide(id);
-      setGuide(careGuide);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // async function getPlantCareGuide() {
+  //   try {
+  //     const careGuide = await apiClient.getPlantGuide(id);
+  //     setGuide(careGuide);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   function handleGoBack(e) {
     e.preventDefault();
@@ -75,9 +65,9 @@ export default function PlantDetail() {
     return navigate(-1);
   }
 
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  // function capitalizeFirstLetter(string) {
+  //   return string.charAt(0).toUpperCase() + string.slice(1);
+  // }
 
   return (
     <div className="container">
@@ -86,11 +76,7 @@ export default function PlantDetail() {
         <button onClick={handleGoBack}>Catalog</button>
         <div className="col-4">
           <img
-            src={
-              plant.default_image && plant.default_image.small_url
-                ? plant.default_image.small_url
-                : noImage
-            }
+            src={plant.small_url ? plant.small_url : noImage}
             className="rounded mb-1 img-fluid"
           />
           <div>
@@ -205,18 +191,30 @@ export default function PlantDetail() {
                   <h5>Care Guide</h5>
                 </div>
               </div>
-              {guide.data
-                ? guide.data[0].section.map((section) => (
-                    <div key={section.id} className="mt-3">
-                      <h6>{capitalizeFirstLetter(section.type)}</h6>
-                      <p>
-                        {section.description
-                          ? section.description
-                          : `No ${section.type} information available.`}
-                      </p>
-                    </div>
-                  ))
-                : null}
+              <div className="mt-2 mb-3">
+                <h6>Watering</h6>
+                {plant.watering_description ? (
+                  <p>{plant.watering_description}</p>
+                ) : (
+                  "Sorry, no watering information available."
+                )}
+              </div>
+              <div className="mt-2 mb-3">
+                <h6>Sunlight</h6>
+                {plant.sunlight_description ? (
+                  <p>{plant.sunlight_description}</p>
+                ) : (
+                  "No sunlight information available."
+                )}
+              </div>
+              <div className="mt-2 mb-3">
+                <h6>Pruning</h6>
+                {plant.pruning_description ? (
+                  <p>{plant.pruning_description}</p>
+                ) : (
+                  "No pruning information available."
+                )}
+              </div>
             </div>
           </div>
         </Collapse>

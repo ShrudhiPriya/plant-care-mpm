@@ -1,7 +1,7 @@
 import {
   plantsPage,
   speciesDetail,
-  speciesGuide,
+  // speciesGuide,
 } from "../../data/example_plants";
 
 const apiClient = {
@@ -14,9 +14,9 @@ const apiClient = {
   getPlantDetails: async function (id) {
     return speciesDetail;
   },
-  getPlantGuide: async function (id) {
-    return speciesGuide;
-  },
+  // getPlantGuide: async function (id) {
+  //   return speciesGuide;
+  // },
 };
 
 export { apiClient };

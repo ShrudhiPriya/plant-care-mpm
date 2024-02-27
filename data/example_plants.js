@@ -218,38 +218,7 @@ const speciesDetail = {
   id: 1,
   common_name: "European Silver Fir",
   scientific_name: ["Abies alba"],
-  other_name: ["Common Silver Fir"],
-  family: null,
-  origin: [
-    "Austria",
-    "Germany",
-    "Switzerland",
-    "France",
-    "Italy",
-    "Slovenia",
-    "Croatia",
-    "Bosnia and Herzegovina",
-    "Serbia",
-    "Montenegro",
-    "Albania",
-    "Bulgaria",
-    "Romania",
-    "Ukraine",
-    "Poland",
-    "Czech Republic",
-    "Slovakia",
-    "Hungary",
-  ],
   type: "tree",
-  dimension: "Height:  60 feet",
-  dimensions: {
-    type: "Height",
-    min_value: 60,
-    max_value: 60,
-    unit: "feet",
-  },
-  cycle: "Perennial",
-  attracts: [],
   propagation: [
     "Cutting",
     "Grafting Propagation",
@@ -258,116 +227,61 @@ const speciesDetail = {
     "Air Layering Propagation",
     "Tissue Culture",
   ],
-  hardiness: {
-    min: "7",
-    max: "7",
-  },
-  hardiness_location: {
-    full_url:
-      "https://perenual.com/api/hardiness-map?species_id=1&size=og&key=sk-ZHZJ65d34444c1d674241",
-    full_iframe:
-      "<iframe frameborder=0 scrolling=yes seamless=seamless width=1000 height=550 style='margin:auto;' src='https://perenual.com/api/hardiness-map?species_id=1&size=og&key=sk-ZHZJ65d34444c1d674241'></iframe>",
-  },
   watering: "Frequent",
-  depth_water_requirement: [],
-  volume_water_requirement: [],
-  watering_period: null,
-  watering_general_benchmark: {
-    value: "7-10",
-    unit: "days",
-  },
-  plant_anatomy: [],
   sunlight: ["full sun"],
   pruning_month: ["February", "March", "April"],
-  pruning_count: [],
-  seeds: 0,
-  maintenance: null,
-  "care-guides":
-    "http://perenual.com/api/species-care-guide-list?species_id=1&key=sk-ZHZJ65d34444c1d674241",
-  soil: [],
-  growth_rate: "High",
-  drought_tolerant: false,
-  salt_tolerant: false,
-  thorny: false,
-  invasive: false,
-  tropical: false,
   indoor: false,
-  care_level: "Medium",
-  pest_susceptibility: [],
-  pest_susceptibility_api: "Coming Soon",
   flowers: false,
-  flowering_season: null,
-  flower_color: "",
-  cones: true,
-  fruits: false,
   edible_fruit: false,
-  edible_fruit_taste_profile: "Coming Soon",
-  fruit_nutritional_value: "Coming Soon",
-  fruit_color: [],
-  harvest_season: null,
-  leaf: true,
-  leaf_color: ["green"],
   edible_leaf: false,
-  cuisine: false,
-  medicinal: true,
   poisonous_to_humans: 0,
   poisonous_to_pets: 0,
   description:
     "European Silver Fir (Abies alba) is an amazing coniferous species native to mountainous regions of central Europe and the Balkans. It is an evergreen tree with a narrow, pyramidal shape and long, soft needles. Its bark is scaly grey-brown and its branches are highly ornamental due to its conical-shaped silver-tinged needles. It is pruned for use as an ornamental evergreen hedging and screening plant, and is also popular for use as a Christmas tree. Young trees grow quickly and have strong, flexible branches which makes them perfect for use as windbreaks. The European Silver Fir is an impressive species, making it ideal for gardens and public spaces.",
-  default_image: {
-    license: 45,
-    license_name: "Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
-    license_url: "https://creativecommons.org/licenses/by-sa/3.0/deed.en",
-    original_url:
-      "https://perenual.com/storage/species_image/1_abies_alba/og/1536px-Abies_alba_SkalitC3A9.jpg",
-    regular_url:
-      "https://perenual.com/storage/species_image/1_abies_alba/regular/1536px-Abies_alba_SkalitC3A9.jpg",
-    medium_url:
-      "https://perenual.com/storage/species_image/1_abies_alba/medium/1536px-Abies_alba_SkalitC3A9.jpg",
-    small_url:
-      "https://perenual.com/storage/species_image/1_abies_alba/small/1536px-Abies_alba_SkalitC3A9.jpg",
-    thumbnail:
-      "https://perenual.com/storage/species_image/1_abies_alba/thumbnail/1536px-Abies_alba_SkalitC3A9.jpg",
-  },
-  other_images:
-    "Upgrade Plan To Supreme For Access https://perenual.com/subscription-api-pricing. Im sorry",
+  small_url:
+    "https://perenual.com/storage/species_image/1_abies_alba/small/1536px-Abies_alba_SkalitC3A9.jpg",
+  watering_description: null,
+  sunlight_description:
+    "European Silver Fir 'Abies Alba' is a species of coniferous tree that grows best in sunny areas. This species of plant requires a minimum of 6 hours of sunlight per day throughout the growing season. Ideally, it should receive up to 8 hours of direct sunlight in the summer months, and 4-5 hours of sunlight in the winter. It is important to note that European Silver Fir 'Abies Alba' is not tolerant of shade and may be damaged if exposed to too much shade.",
+  pruning_description:
+    "European Silver Fir should be pruned in the late winter to early spring months. This species should be pruned lightly and selectively, removing any dead, diseased, or broken branches. Foliage and branches that cross over 1 another should also be removed. Generally, pruning should not exceed 1/3 of the total height and width of the tree. When pruning, begin from the bottom of the tree and steadily move upwards.",
 };
 
-const speciesGuide = {
-  data: [
-    {
-      id: 34,
-      species_id: 1,
-      common_name: "European Silver Fir",
-      scientific_name: ["Abies alba"],
-      section: [
-        {
-          id: 109,
-          type: "watering",
-          description:
-            "European Silver Fir 'Abies Alba' should be watered about once a week, depending on the season and weather conditions. During the growing season (spring to mid-summer), water deeply and thoroughly. For the rest of the year, water only when the soil is dry. When watering, ensure that the root system is saturated. Do not over-water, as this can lead to root rot.",
-        },
-        {
-          id: 110,
-          type: "sunlight",
-          description:
-            "European Silver Fir 'Abies Alba' is a species of coniferous tree that grows best in sunny areas. This species of plant requires a minimum of 6 hours of sunlight per day throughout the growing season. Ideally, it should receive up to 8 hours of direct sunlight in the summer months, and 4-5 hours of sunlight in the winter. It is important to note that European Silver Fir 'Abies Alba' is not tolerant of shade and may be damaged if exposed to too much shade.",
-        },
-        {
-          id: 111,
-          type: "pruning",
-          description:
-            "European Silver Fir should be pruned in the late winter to early spring months. This species should be pruned lightly and selectively, removing any dead, diseased, or broken branches. Foliage and branches that cross over 1 another should also be removed. Generally, pruning should not exceed 1/3 of the total height and width of the tree. When pruning, begin from the bottom of the tree and steadily move upwards.",
-        },
-      ],
-    },
-  ],
-  to: 1,
-  per_page: 30,
-  current_page: 1,
-  from: 1,
-  last_page: 1,
-  total: 1,
-};
+// const speciesGuide = {
+//   data: [
+//     {
+//       id: 34,
+//       species_id: 1,
+//       common_name: "European Silver Fir",
+//       scientific_name: ["Abies alba"],
+//       section: [
+//         {
+//           id: 109,
+//           type: "watering",
+//           description:
+//             "European Silver Fir 'Abies Alba' should be watered about once a week, depending on the season and weather conditions. During the growing season (spring to mid-summer), water deeply and thoroughly. For the rest of the year, water only when the soil is dry. When watering, ensure that the root system is saturated. Do not over-water, as this can lead to root rot.",
+//         },
+//         {
+//           id: 110,
+//           type: "sunlight",
+//           description:
+//             "European Silver Fir 'Abies Alba' is a species of coniferous tree that grows best in sunny areas. This species of plant requires a minimum of 6 hours of sunlight per day throughout the growing season. Ideally, it should receive up to 8 hours of direct sunlight in the summer months, and 4-5 hours of sunlight in the winter. It is important to note that European Silver Fir 'Abies Alba' is not tolerant of shade and may be damaged if exposed to too much shade.",
+//         },
+//         {
+//           id: 111,
+//           type: "pruning",
+//           description:
+//             "European Silver Fir should be pruned in the late winter to early spring months. This species should be pruned lightly and selectively, removing any dead, diseased, or broken branches. Foliage and branches that cross over 1 another should also be removed. Generally, pruning should not exceed 1/3 of the total height and width of the tree. When pruning, begin from the bottom of the tree and steadily move upwards.",
+//         },
+//       ],
+//     },
+//   ],
+//   to: 1,
+//   per_page: 30,
+//   current_page: 1,
+//   from: 1,
+//   last_page: 1,
+//   total: 1,
+// };
 
-export { plantsPage, speciesDetail, speciesGuide };
+export { plantsPage, speciesDetail };
