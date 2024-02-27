@@ -58,9 +58,10 @@ export default function PlantDetail() {
 
   return (
     <div className="container">
+      <button onClick={handleGoBack} className="btn btn-secondary mb-3">
+        Catalog
+      </button>
       <div className="row">
-        {/* <Link to={-1}>Catalog</Link> */}
-        <button onClick={handleGoBack}>Catalog</button>
         <div className="col-4">
           <img
             src={plant.medium_image ? plant.medium_image : noImage}
