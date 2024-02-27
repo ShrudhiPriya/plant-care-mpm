@@ -240,7 +240,8 @@ const speciesDetail = {
     "European Silver Fir (Abies alba) is an amazing coniferous species native to mountainous regions of central Europe and the Balkans. It is an evergreen tree with a narrow, pyramidal shape and long, soft needles. Its bark is scaly grey-brown and its branches are highly ornamental due to its conical-shaped silver-tinged needles. It is pruned for use as an ornamental evergreen hedging and screening plant, and is also popular for use as a Christmas tree. Young trees grow quickly and have strong, flexible branches which makes them perfect for use as windbreaks. The European Silver Fir is an impressive species, making it ideal for gardens and public spaces.",
   small_url:
     "https://perenual.com/storage/species_image/1_abies_alba/small/1536px-Abies_alba_SkalitC3A9.jpg",
-  watering_description: null,
+  watering_description:
+    "European Silver Fir 'Abies Alba' should be watered about once a week, depending on the season and weather conditions. During the growing season (spring to mid-summer), water deeply and thoroughly. For the rest of the year, water only when the soil is dry. When watering, ensure that the root system is saturated. Do not over-water, as this can lead to root rot.",
   sunlight_description:
     "European Silver Fir 'Abies Alba' is a species of coniferous tree that grows best in sunny areas. This species of plant requires a minimum of 6 hours of sunlight per day throughout the growing season. Ideally, it should receive up to 8 hours of direct sunlight in the summer months, and 4-5 hours of sunlight in the winter. It is important to note that European Silver Fir 'Abies Alba' is not tolerant of shade and may be damaged if exposed to too much shade.",
   pruning_description:

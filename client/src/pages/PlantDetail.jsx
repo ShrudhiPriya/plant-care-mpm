@@ -45,15 +45,6 @@ export default function PlantDetail() {
     }
   }
 
-  // async function getPlantCareGuide() {
-  //   try {
-  //     const careGuide = await apiClient.getPlantGuide(id);
-  //     setGuide(careGuide);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   function handleGoBack(e) {
     e.preventDefault();
     // Not suer why it has to be greater than 2
@@ -65,10 +56,6 @@ export default function PlantDetail() {
     return navigate(-1);
   }
 
-  // function capitalizeFirstLetter(string) {
-  //   return string.charAt(0).toUpperCase() + string.slice(1);
-  // }
-
   return (
     <div className="container">
       <div className="row">
@@ -76,7 +63,7 @@ export default function PlantDetail() {
         <button onClick={handleGoBack}>Catalog</button>
         <div className="col-4">
           <img
-            src={plant.small_url ? plant.small_url : noImage}
+            src={plant.medium_image ? plant.medium_image : noImage}
             className="rounded mb-1 img-fluid"
           />
           <div>
@@ -132,7 +119,8 @@ export default function PlantDetail() {
               </p>
               <CloudSun />
               <p>
-                <strong>Sunlight:</strong> {plant.sunlight}
+                <strong>Sunlight:</strong>{" "}
+                {plant.sunlight ? plant.sunlight.join(", ") : null}
               </p>
               <Scissors />
               <p>

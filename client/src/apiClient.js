@@ -1,5 +1,5 @@
 import {
-  plantsPage,
+  // plantsPage,
   speciesDetail,
   // speciesGuide,
 } from "../../data/example_plants";
@@ -12,7 +12,8 @@ const apiClient = {
     return await response.json();
   },
   getPlantDetails: async function (id) {
-    return speciesDetail;
+    const response = await fetch(`/api/catalog/${id}`);
+    return await response.json();
   },
   // getPlantGuide: async function (id) {
   //   return speciesGuide;
