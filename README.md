@@ -47,8 +47,9 @@ This project uses an external API. To communicate with the API you will need you
 1. Go to [perenual](https://perenual.com/docs/api)
 2. Click on GET API KEY.
 3. Create an account or log in.
-4. Inside your account go to **Developer** and generate a new key.
-5. Copy the key and add it to your `.env`file (replace YOUR_API_KEY with your actual key):
+4. Once you are logged you should be inside **Developer**. Click on generate a new key.
+5. On the purpose of use you can write "This API will be used for educational purposes."
+6. Copy the key and add it to your `.env`file (replace YOUR_API_KEY with your actual key):
 
 ```
 API_KEY=YOUR_API_KEY
@@ -56,5 +57,5 @@ API_KEY=YOUR_API_KEY
 
 This API is free to use but there are some limitations:
 
-- First and most important, perenual API can only be called 100 times per day. If we surpass that number, we would obtain a 429 error code.
-- Although perenual has information of 10000 plants, we can only access to 3000.
+- First and most important, perenual API can only be called **100 times per day**. If we surpass that number, we would obtain a 429 error code. For this reason, there is a file in data called example_plants.js where there is a copy of the information of the first page (plantsPage) and the details of the first plant (speciesDetail). To use it, in the clinet > src folder there is a file called apiClient.js that manages the connection with the external API. There are instructions there on how to use the example data.
+- Although perenual has information of 10000 plants, we can only **access to 3000**, so it is possible that some searches don't provide complete results. For example, if you look for a "monstera", you will see the name of the plant and you can click on it but there are no images available and the care details are not there. This is not an error, we are just being cheap.

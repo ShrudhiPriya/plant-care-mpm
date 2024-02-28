@@ -8,8 +8,6 @@ import {
   HandHoldingSeeding,
   Paw,
   User,
-  Sun,
-  CalendarPen,
   AppleWhole,
   CloudSun,
   Flower,
@@ -46,9 +44,8 @@ export default function PlantDetail() {
 
   function handleGoBack(e) {
     e.preventDefault();
-    // Not suer why it has to be greater than 2
+    // Not suer why it has to be greater than 2. I think it is related to the useEffect calling twice.
     const hasPreviousPage = window.history.length > 2;
-    console.log(hasPreviousPage);
     if (!hasPreviousPage) {
       return navigate("/catalog");
     }
