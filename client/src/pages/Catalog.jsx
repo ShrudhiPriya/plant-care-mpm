@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
 
+
 export default function Catalog() {
   const [plants, setPlants] = useState([]);
   const [error, setError] = useState("");

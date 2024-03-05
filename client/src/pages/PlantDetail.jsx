@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; 
 // import { useRouter } from "next/router";
-import { apiClient } from "../apiClient";
+import { apiClient } from "../apiClient"; // To handle API requests 
 import {
   Home,
   Leaf,
@@ -15,24 +15,30 @@ import {
   Tree,
   Scissors,
   HandHoldingHeart,
-} from "react-flaticons";
-import Button from "react-bootstrap/Button";
-import Collapse from "react-bootstrap/Collapse";
+} from "react-flaticons"; //To import icons from react-flaticons library
+import Button from "react-bootstrap/Button"; //cretae buttons in the UI, (props like onCLick, variant,size)
+import Collapse from "react-bootstrap/Collapse"; //create collapsible elements in the user interface. Allows content to be shown or hidden based on a toggle state. takes a boolean in prop to control whether the content should be shown or hidden.
 
 export default function PlantDetail() {
   const { id } = useParams();
-  const [plant, setPlant] = useState([]);
+  const [plant, setPlant] = useState([]); //Holds the details of the plant fetched from the API. 
+  //It stores a URL for a default image to be displayed in case the plant image is not available.
   const noImage =
     "http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png";
-  const [openDescription, setOpenDescription] = useState(false);
-  const [openGuide, setOpenGuide] = useState(false);
+  const [openDescription, setOpenDescription] = useState(false);//variables are used to toggle the visibility of description and care guide sections respectively.
+  const [openGuide, setOpenGuide] = useState(false);//variables are used to toggle the visibility of description and care guide sections respectively.
   const navigate = useNavigate();
+  // hook used for navigation in a React application. It returns a navigate function that can be used to programmatically 
+  // navigate the user to different routes within the application without directly relying on <Link> components or <a> tags.
 
   useEffect(() => {
-    getPlant();
+    getPlant(); 
     // getPlantCareGuide();
+    // fetching plant details when the component mounts using the getPlant function.
   }, []);
 
+// It's an asynchronous function that fetches plant details 
+// using the apiClient.getPlantDetails method and updates the plant state variable accordingly.
   async function getPlant() {
     try {
       const plant = await apiClient.getPlantDetails(id);
@@ -42,6 +48,8 @@ export default function PlantDetail() {
     }
   }
 
+// It's a function that handles navigation either to the catalog page or the previous page in 
+// the browser's history, depending on whether there's a previous page in the history stack.
   function handleGoBack(e) {
     e.preventDefault();
     // Not suer why it has to be greater than 2. I think it is related to the useEffect calling twice.
@@ -52,6 +60,14 @@ export default function PlantDetail() {
     return navigate(-1);
   }
 
+/* 
+1. The UI consists of a container with buttons for navigation, a section displaying plant details 
+such as images, common and scientific names, and various attributes like type, indoor status, 
+poisonous nature, etc.
+2. Buttons are provided to toggle the visibility of description and care guide sections.
+3. Description and care guide sections are collapsible (Collapse component from React Bootstrap) 
+   and their visibility is controlled by the openDescription and openGuide state variables respectively.
+*/
   return (
     <div className="container">
       <button onClick={handleGoBack} className="btn btn-secondary mb-3">
